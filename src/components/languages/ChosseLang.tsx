@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { languages } from "./list";
 import SelectComponent from "../imputs/SelectComponent";
 import { Typography } from "@mui/material";
 import ReactCountryFlag from "react-country-flag";
+import { useTranslation } from "react-i18next";
 
 function ChosseLang() {
-  const [lang, setLang] = useState<string>();
+  const [lang, setLang] = useState(
+    window.localStorage.getItem("i18nextLng") as string
+  );
+  const { i18n, t } = useTranslation();
+  const dialogTitle = t("titleChangeDialog");
+
+  useEffect(() => {
+    document.body.dir = i18n.dir();
+  }, [i18n, i18n.language]);
+
   const selectable = languages.map((l) => {
     return {
       optionValue: l.code,
@@ -25,10 +35,14 @@ function ChosseLang() {
 
   return (
     <SelectComponent
-      lable="בחירת שפה"
+      lable={dialogTitle}
       options={selectable}
-      setValue={setLang}
       value={lang}
+      onChange={(e) => {
+        const NV = e.target.value as string;
+        setLang(NV);
+        i18n.changeLanguage(NV);
+      }}
     />
   );
 }
