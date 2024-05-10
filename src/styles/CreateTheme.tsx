@@ -41,6 +41,9 @@ function ProviderTheme(props: ProviderThemeProps) {
         direction: "rtl",
         components: {
           MuiTextField: {
+            defaultProps: {
+              size: "small",
+            },
             styleOverrides: {
               root: {
                 "& .MuiOutlinedInput-root": {
