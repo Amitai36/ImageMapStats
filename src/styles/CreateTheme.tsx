@@ -9,37 +9,30 @@ import rtlPlugin from "stylis-plugin-rtl";
 import { prefixer } from "stylis";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
-//   import { DarkModeContext } from "../contexts/darkMode";
+import { useDarkStore } from "../store/DarkMode";
 
 interface ProviderThemeProps {
   children: ReactNode;
 }
 
 function ProviderTheme(props: ProviderThemeProps) {
-  // const localStorage = window.localStorage;
-  // const [darkMode, setDarkMode] = React.useState<PaletteMode>(
-  //   (localStorage.getItem("dark") as PaletteMode) ?? "dark"
-  // );
-
-  // const toggleTheme = () => {
-  //   setDarkMode((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  //   window.localStorage.setItem(
-  //     "dark",
-  //     darkMode === "light" ? "dark" : "light"
-  //   );
-  // };
-
+  const { darkMode } = useDarkStore();
   const theme = React.useMemo(
     () =>
       createTheme({
         palette: {
-          mode: "dark",
+          mode: darkMode,
           background: {
-            default: /* "dark" === "dark" ? */ "black" /*  : "#e2f2f2" */,
+            default: darkMode === "dark" ? "black" : "#e2f2f2",
           },
         },
         direction: "rtl",
         components: {
+          MuiSelect: {
+            defaultProps: {
+              size: "small",
+            },
+          },
           MuiTextField: {
             defaultProps: {
               size: "small",
@@ -57,9 +50,7 @@ function ProviderTheme(props: ProviderThemeProps) {
           },
         },
       }),
-    [
-      /* "dark" */
-    ]
+    [darkMode]
   );
   const cacheRtl = createCache({
     key: "muirtl",
@@ -68,9 +59,6 @@ function ProviderTheme(props: ProviderThemeProps) {
 
   return (
     <CacheProvider value={cacheRtl}>
-      {/* <DarkModeContext.Provider
-          value={{ mode: darkMode, toggleMode: toggleTheme }}
-        > */}
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div
@@ -83,7 +71,6 @@ function ProviderTheme(props: ProviderThemeProps) {
           {props.children}
         </div>
       </ThemeProvider>
-      {/* </DarkModeContext.Provider> */}
     </CacheProvider>
   );
 }

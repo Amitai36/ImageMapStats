@@ -4,6 +4,7 @@ import { Image } from "@mui/icons-material";
 import { ReactNode } from "react";
 import ChosseLang from "../languages/ChosseLang";
 import SearchImg from "../SearchImg";
+import DarkMode from "../DarkMode";
 
 interface NavBarProps {
   children?: ReactNode;
@@ -20,6 +21,7 @@ function NavBar(props: NavBarProps) {
       SNAPSEARCH INSIGHT
     </Button>,
     <ChosseLang />,
+    <DarkMode />,
   ];
   return (
     <div style={{ maxHeight: "10%", height: "10%" }}>

@@ -15,9 +15,9 @@ function SelectComponent<T>(props: SelectComponentProps<T> & SelectProps) {
     <FormControl fullWidth>
       <InputLabel>{lable}</InputLabel>
       <Select size="small" value={value} label={lable} {...other}>
-        {options.map((option) => (
+        {options.map((option, index) => (
           //@ts-expect-error the menu item dont like T
-          <MenuItem key={option.lable} value={option.optionValue}>
+          <MenuItem key={index} value={option.optionValue}>
             {option.lable}
           </MenuItem>
         ))}
