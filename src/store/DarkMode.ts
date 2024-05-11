@@ -6,7 +6,9 @@ interface DarkModeProps {
 }
 
 export const useDarkStore = create<DarkModeProps>((set) => ({
-  darkMode: "dark",
+  darkMode:
+    (window.localStorage.getItem("mode") as DarkModeProps["darkMode"]) ??
+    "dark",
   setDarkMode: (mode) => {
     set(() => ({
       darkMode: mode,
