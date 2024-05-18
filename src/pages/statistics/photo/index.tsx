@@ -60,7 +60,7 @@ function PhotoStatistics() {
     },
   ];
   return (
-    <>
+    <div style={{ height: "90%" }}>
       {isLoading ? (
         <img src={url} />
       ) : (
@@ -90,7 +90,7 @@ function PhotoStatistics() {
           </Grid>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

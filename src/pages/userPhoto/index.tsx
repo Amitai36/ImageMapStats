@@ -14,12 +14,15 @@ export default function UserPhotos() {
 
   React.useEffect(() => {
     if (scrollUp.current) {
-      scrollUp.current?.scrollIntoView({ behavior: "smooth" });
+      scrollUp.current?.scrollIntoView({ behavior: "smooth", inline: "start" });
     }
   }, []);
 
   return (
-    <div ref={scrollUp} style={{ width: "100%", height: "100%" }}>
+    <div
+      ref={scrollUp}
+      // style={{ width: "100%", height: "90%", maxHeight: "90%" }}
+    >
       {isLoading || !data ? (
         <Typography>Loading</Typography>
       ) : (

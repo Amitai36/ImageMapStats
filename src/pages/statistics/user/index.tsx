@@ -47,7 +47,7 @@ function UserStatistics() {
     },
   ];
   return (
-    <>
+    <div style={{ height: "90%" }}>
       {isLoading ? (
         <Typography variant="h5">{t("loading") + "..."}</Typography>
       ) : (
@@ -75,7 +75,7 @@ function UserStatistics() {
           </Grid>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
