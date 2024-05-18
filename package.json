@@ -25,6 +25,7 @@
     "react-dom": "^18.2.0",
     "react-hotkeys-hook": "^4.5.0",
     "react-i18next": "^14.1.1",
+    "react-loading": "^2.0.3",
     "react-query": "^3.39.3",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.23.1",

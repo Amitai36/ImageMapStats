@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/layout/NavBar";
 import ProviderTheme from "./styles/CreateTheme";
 const Home = lazy(() => import("./pages/home"));
+const MapPage = lazy(() => import("./pages/map"));
 const SearchRes = lazy(() => import("./pages/searchRes"));
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
         <Route path="/" element={<NavBar />}>
           <Route path="/home" element={<Home />} />
           <Route path="/search" element={<SearchRes />} />
-          <Route path="/map" element={<SearchRes />} />
+          <Route path="/map" element={<MapPage />} />
         </Route>
       </Routes>
     </ProviderTheme>
