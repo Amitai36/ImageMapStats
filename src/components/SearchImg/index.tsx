@@ -1,11 +1,12 @@
-import { useRef, useState } from "react";
-import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { useHotkeys } from "react-hotkeys-hook";
-import TextField from "@mui/material/TextField";
 import { CameraAlt, SearchOff } from "@mui/icons-material";
 import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
+import { useHotkeys } from "react-hotkeys-hook";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import Button from "@mui/material/Button";
+import { useRef, useState } from "react";
+import Voice from "./Voice";
 
 function SearchImg() {
   const [search, setSearch] = useState("");
@@ -45,6 +46,7 @@ function SearchImg() {
             <Button onClick={handleSearch} disabled={!search} size="small">
               <SearchOff />
             </Button>
+            <Voice onFinish={handleSearch} setValue={setSearch} />
             <Button disabled={!!search}>
               <CameraAlt />
             </Button>

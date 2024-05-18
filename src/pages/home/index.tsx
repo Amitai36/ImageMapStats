@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 
-import CarouselComponent from "../../components/CarouselComponent";
-import SearchImg from "../../components/SearchImg";
-import searchImage from "../../../public/images/searchImages.png";
-import seeMoreOnMap from "../../../public/images/see_on_map.png";
+import showMorePhotoFromArtist from "../../../public/images/show_more_photo_from_artist.png";
 import seePhotoStatistics from "../../../public/images/see_photo_statistics.png";
 import seeUserStatistics from "../../../public/images/see_user_statistics.png";
-import showMorePhotoFromArtist from "../../../public/images/show_more_photo_from_artist.png";
+import CarouselComponent from "../../components/CarouselComponent";
+import searchImage from "../../../public/images/searchImages.png";
+import seeMoreOnMap from "../../../public/images/see_on_map.png";
+import SearchImg from "../../components/SearchImg";
 
 
 function Home() {

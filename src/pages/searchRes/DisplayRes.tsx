@@ -1,11 +1,12 @@
-import { FetchRes, OrderBySearch } from "../../api/images/types";
-import { useEffect } from "react";
+import { SetURLSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import SelectOrder from "./SelectOrder";
-import CreateTabs from "../../components/CreateTabs";
-import { SetURLSearchParams } from "react-router-dom";
-import DisplayResponsiveCards from "../../components/cards/DisplayResponsiveCards";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
+
+import DisplayResponsiveCards from "../../components/cards/DisplayResponsiveCards";
+import { FetchRes, OrderBySearch } from "../../api/images/types";
+import CreateTabs from "../../components/CreateTabs";
 
 interface DisplayResProps {
   items: FetchRes | undefined;
