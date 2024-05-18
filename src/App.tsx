@@ -3,7 +3,9 @@ import { Route, Routes } from "react-router-dom";
 
 import NavBar from "./components/layout/NavBar";
 import ProviderTheme from "./styles/CreateTheme";
+import PhotoStatistics from "./pages/statistics/photo";
 const Home = lazy(() => import("./pages/home"));
+const UserStatistics = lazy(() => import("./pages/statistics/user"));
 const MapPage = lazy(() => import("./pages/map"));
 const SearchRes = lazy(() => import("./pages/searchRes"));
 
@@ -15,6 +17,12 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/search" element={<SearchRes />} />
           <Route path="/map" element={<MapPage />} />
+          <Route path="/userStatistics/:name" element={<UserStatistics />} />
+          <Route
+            path="/search/photoStatistics/:photoId"
+            element={<PhotoStatistics />}
+          />
+          {/* <Route path="/userPhotos/:name" element={<UserPhotos />} /> */}
         </Route>
       </Routes>
     </ProviderTheme>
