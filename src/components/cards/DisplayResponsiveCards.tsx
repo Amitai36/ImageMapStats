@@ -4,13 +4,13 @@ import CreateCards from "./CreateCards";
 import LoaderCard from "./LoaderCard";
 
 interface DisplayResponsiveCardsProps {
-  items: FetchRes | undefined;
+  items: FetchRes["results"] | undefined;
 }
 
 function DisplayResponsiveCards(props: DisplayResponsiveCardsProps) {
   const { items } = props;
   const loader = Array(10).fill(<LoaderCard />);
-  const results = items?.results ?? loader;
+  const results = items ?? loader;
   return (
     <div
       style={{

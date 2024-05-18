@@ -49,7 +49,7 @@ export const getUserStatistics = async ({ name }: { name: string }) => {
 export const getUserPhotos = async ({ name }: { name: string }) => {
   const res = axios
     .get<FetchRes["results"]>(
-      `https://api.unsplash.com/users/${name}/photos?&client_id=${idClient}&per_page=30`
+      `https://api.unsplash.com/users/${name}/photos?&client_id=${idClient}&per_page=40`
     )
     .then((res) => res.data);
 

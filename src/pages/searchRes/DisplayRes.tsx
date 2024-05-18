@@ -63,7 +63,7 @@ function DisplayRes(props: DisplayResProps) {
           </div>
         </>
       )}
-      <DisplayResponsiveCards items={items} />
+      <DisplayResponsiveCards items={items?.results} />
     </div>
   );
 }
