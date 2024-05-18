@@ -27,6 +27,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Results } from "../../api/images/types";
 import MenuCard from "./MenuCard";
+import Shares from "./Shares";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -53,6 +54,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 function CreateCards(props: CreateCardsProps) {
   const { res } = props;
   const trans = useTranslation();
+
   const photoStatistics = trans.t("photoStatistics");
   const userStatistics = trans.t("userStatistics");
   const portfolio = trans.t("portfolio");
@@ -84,7 +86,6 @@ function CreateCards(props: CreateCardsProps) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
   return (
     <div>
       <Card>
@@ -139,9 +140,9 @@ function CreateCards(props: CreateCardsProps) {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
+          {/* <IconButton aria-label="add to favorites">
             <FavoriteIcon />
-          </IconButton>
+          </IconButton> */}
           <IconButton onClick={() => setShare(!share)} aria-label="share">
             <ShareIcon />
           </IconButton>
@@ -160,17 +161,15 @@ function CreateCards(props: CreateCardsProps) {
           <CardContent>
             {res?.tags?.map((tag, index) => (
               <Typography component="span" key={index}>
-                {
-                  tag?.source?.cover_photo?.alternative_slugs[
-                    language as keyof Results["alternative_slugs"]
-                  ]
-                }
+                {tag?.source?.cover_photo?.alternative_slugs[
+                  language as keyof Results["alternative_slugs"]
+                ] ?? tag.title}
               </Typography>
             ))}
           </CardContent>
         </Collapse>
       </Card>
-      {/* {share && <Sharing open={share} setOpen={setShare} url={res.urls.full} />} */}
+      <Shares open={share} setOpen={setShare} url={res.urls.full} />
     </div>
   );
 }

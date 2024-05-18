@@ -31,6 +31,7 @@
     "react-query": "^3.39.3",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.23.1",
+    "react-share": "^5.1.0",
     "react-toastify": "^10.0.5",
     "stylis": "^4.3.2",
     "stylis-plugin-rtl": "^2.1.1",

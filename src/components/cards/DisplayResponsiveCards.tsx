@@ -1,4 +1,5 @@
 import { Grid } from "@mui/material";
+
 import { FetchRes } from "../../api/images/types";
 import CreateCards from "./CreateCards";
 import LoaderCard from "./LoaderCard";

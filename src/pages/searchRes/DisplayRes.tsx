@@ -33,7 +33,6 @@ function DisplayRes(props: DisplayResProps) {
   const { t } = useTranslation();
 
   useEffect(() => {
-    console.log(items?.total);
     if (items?.total === 0 && !isLoading) {
       toast.warning(t("no data"));
     }
