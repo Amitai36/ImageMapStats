@@ -47,7 +47,7 @@ function SearchImg() {
               <SearchOff />
             </Button>
             <Voice onFinish={handleSearch} setValue={setSearch} />
-            <Button disabled={!!search}>
+            <Button onClick={() => navigate("/camera")} disabled={!!search}>
               <CameraAlt />
             </Button>
           </InputAdornment>

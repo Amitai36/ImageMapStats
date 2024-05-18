@@ -12,10 +12,10 @@ import CardMedia from "@mui/material/CardMedia";
 import { useTranslation } from "react-i18next";
 import Collapse from "@mui/material/Collapse";
 import { styled } from "@mui/material/styles";
+import { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
 import { Button } from "@mui/material";
-import moment from "moment";
 import "moment/dist/locale/he";
 import "moment/dist/locale/fr";
 import "moment/dist/locale/ja";
@@ -24,7 +24,7 @@ import "moment/dist/locale/es";
 import "moment/dist/locale/it";
 import "moment/dist/locale/ko";
 import "moment/dist/locale/pt";
-import * as React from "react";
+import moment from "moment";
 
 import { Results } from "../../api/images/types";
 import MenuCard from "./MenuCard";
@@ -61,9 +61,7 @@ function CreateCards(props: CreateCardsProps) {
   const portfolio = trans.t("portfolio");
   const location = trans.t("location");
   const language = trans.i18n.language;
-
   moment.locale(language);
-
   const alt =
     res.alternative_slugs[
       trans.i18n.language as keyof Results["alternative_slugs"]
@@ -72,9 +70,9 @@ function CreateCards(props: CreateCardsProps) {
   const createdAt = res.created_at;
   const user = res.user;
   const userPortfolio = res.user.social?.portfolio_url;
-  const [expanded, setExpanded] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [share, setShare] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [share, setShare] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const open = Boolean(anchorEl);

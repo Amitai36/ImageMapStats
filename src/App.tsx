@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 import ProviderTheme from "./styles/CreateTheme";
 import NavBar from "./components/layout/NavBar";
+import Camera from "./components/SearchImg/Camera";
 
 const PhotoStatistics = lazy(() => import("./pages/statistics/photo"));
 const UserStatistics = lazy(() => import("./pages/statistics/user"));
@@ -25,6 +26,7 @@ function App() {
             path="/search/photoStatistics/:photoId"
             element={<PhotoStatistics />}
           />
+          <Route path="/camera" element={<Camera />} />
         </Route>
       </Routes>
     </ProviderTheme>
