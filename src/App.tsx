@@ -1,16 +1,19 @@
+import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import NavBar from "./components/layout/NavBar";
-import Home from "./pages/home";
 import ProviderTheme from "./styles/CreateTheme";
+const Home = lazy(() => import("./pages/home"));
+const SearchRes = lazy(() => import("./pages/searchRes"));
 
 function App() {
   return (
     <ProviderTheme>
-      <NavBar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        {/* <Route path="/search" element={<Home />} /> */}
+        <Route path="/" element={<NavBar />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/search" element={<SearchRes />} />
+        </Route>
       </Routes>
     </ProviderTheme>
   );

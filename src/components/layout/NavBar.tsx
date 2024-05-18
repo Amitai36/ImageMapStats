@@ -1,5 +1,5 @@
 import { AppBar, Button, Toolbar } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Image } from "@mui/icons-material";
 import { ReactNode } from "react";
 import ChosseLang from "../languages/ChosseLang";
@@ -24,23 +24,26 @@ function NavBar(props: NavBarProps) {
     <DarkMode />,
   ];
   return (
-    <div style={{ maxHeight: "10%", height: "10%" }}>
-      <AppBar
-        sx={{
-          backdropFilter: "blur(1px)",
-          backgroundColor: "transparent",
-        }}
-      >
-        <Toolbar variant="dense">
-          {buttons.map((button) => (
-            <div key={button.key} style={{ marginInline: "10px" }}>
-              {button}
-            </div>
-          ))}
-          {pathname !== "/" && <SearchImg />}
-          {components}
-        </Toolbar>
-      </AppBar>
+    <div style={{ height: "100%" }}>
+      <div style={{ height: "10%" }}>
+        <AppBar
+          sx={{
+            backdropFilter: "blur(1px)",
+            backgroundColor: "transparent",
+          }}
+        >
+          <Toolbar variant="dense">
+            {buttons.map((button) => (
+              <div key={button.key} style={{ marginInline: "10px" }}>
+                {button}
+              </div>
+            ))}
+            {pathname !== "/home" && <SearchImg />}
+            {components}
+          </Toolbar>
+        </AppBar>
+      </div>
+      <Outlet />
     </div>
   );
 }
