@@ -13,6 +13,7 @@ function App() {
         <Route path="/" element={<NavBar />}>
           <Route path="/home" element={<Home />} />
           <Route path="/search" element={<SearchRes />} />
+          <Route path="/map" element={<SearchRes />} />
         </Route>
       </Routes>
     </ProviderTheme>
