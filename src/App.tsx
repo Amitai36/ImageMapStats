@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import ProviderTheme from "./styles/CreateTheme";
 import NavBar from "./components/layout/NavBar";
 import Camera from "./components/SearchImg/Camera";
+import SignIn from "./pages/signup";
 
 const PhotoStatistics = lazy(() => import("./pages/statistics/photo"));
 const UserStatistics = lazy(() => import("./pages/statistics/user"));
@@ -15,7 +16,8 @@ const Home = lazy(() => import("./pages/home"));
 function App() {
   return (
     <ProviderTheme>
-      <Routes>
+      <SignIn />
+      {/* <Routes>
         <Route path="/" element={<NavBar />}>
           <Route path="/userStatistics/:name" element={<UserStatistics />} />
           <Route path="/userPhotos/:name" element={<UserPhotos />} />
@@ -28,7 +30,7 @@ function App() {
           />
           <Route path="/camera" element={<Camera />} />
         </Route>
-      </Routes>
+      </Routes> */}
     </ProviderTheme>
   );
 }
