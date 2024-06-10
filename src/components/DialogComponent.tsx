@@ -34,15 +34,8 @@ export default function DialogComponent(props: DialogComponentProps) {
   const close = t("closeDialog");
 
   return (
-    <Dialog
-      fullScreen={fullScreen}
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="responsive-dialog-title"
-    >
-      <DialogTitle color={color} id="responsive-dialog-title">
-        {text}
-      </DialogTitle>
+    <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
+      <DialogTitle color={color}>{text}</DialogTitle>
       <DialogContent>
         <DialogContentText>{content}</DialogContentText>
       </DialogContent>

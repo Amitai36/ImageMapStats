@@ -2,9 +2,8 @@ import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import ProviderTheme from "./styles/CreateTheme";
-import NavBar from "./components/layout/NavBar";
 import Camera from "./components/SearchImg/Camera";
-import SignIn from "./pages/signup";
+import Log from "./pages/start/Log";
 
 const PhotoStatistics = lazy(() => import("./pages/statistics/photo"));
 const UserStatistics = lazy(() => import("./pages/statistics/user"));
@@ -16,9 +15,8 @@ const Home = lazy(() => import("./pages/home"));
 function App() {
   return (
     <ProviderTheme>
-      <SignIn />
-      {/* <Routes>
-        <Route path="/" element={<NavBar />}>
+      <Routes>
+        <Route path="/" element={<Log />}>
           <Route path="/userStatistics/:name" element={<UserStatistics />} />
           <Route path="/userPhotos/:name" element={<UserPhotos />} />
           <Route path="/search" element={<SearchRes />} />
@@ -30,7 +28,7 @@ function App() {
           />
           <Route path="/camera" element={<Camera />} />
         </Route>
-      </Routes> */}
+      </Routes>
     </ProviderTheme>
   );
 }

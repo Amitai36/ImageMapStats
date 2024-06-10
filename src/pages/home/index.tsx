@@ -7,7 +7,7 @@ import CarouselComponent from "../../components/CarouselComponent";
 import searchImage from "../../../public/images/searchImages.png";
 import seeMoreOnMap from "../../../public/images/see_on_map.png";
 import SearchImg from "../../components/SearchImg";
-
+import { useLocation } from "react-router-dom";
 
 function Home() {
   const { t } = useTranslation();
@@ -18,6 +18,7 @@ function Home() {
     { imgSrc: seeUserStatistics, lable: t("seeUserStatistics") },
     { imgSrc: seePhotoStatistics, lable: t("seePhotoStatistics") },
   ];
+  const { pathname } = useLocation();
 
   return (
     <div
@@ -30,9 +31,11 @@ function Home() {
         alignItems: "center",
       }}
     >
-      <div style={{ height: "20%" }}>
-        <SearchImg />
-      </div>
+      {pathname !== "/" && (
+        <div style={{ height: "20%" }}>
+          <SearchImg />
+        </div>
+      )}
       <div
         style={{
           direction: "ltr",

@@ -7,6 +7,7 @@ import { dir } from "i18next";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAddUser } from "../../api/users/query";
+import { toast } from "react-toastify";
 
 interface SignInForm {
   name: string;
@@ -19,20 +20,22 @@ function Form() {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm<SignInForm>();
-  const useAddUserFunc = useAddUser({
-    email: getValues().email,
-    name: getValues().name,
-    password: getValues().password,
-  });
+
+  const addingUser = useAddUser();
+
   const [showPassword, setShowpassword] = useState(false);
   const onSubmit = (e: SignInForm) => {
-    console.log(e);
-    useAddUserFunc.mutate(undefined, {
-      onSuccess: () => console.log("success"),
-    });
+    addingUser.mutate(
+      { email: e.email, password: e.password, name: e.name },
+      {
+        onSuccess: () => {
+          toast.success("הנתונים עלו בהצלחה");
+        },
+      }
+    );
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack justifyContent={"center"} spacing={2} alignItems={"center"}>
@@ -66,7 +69,9 @@ function Form() {
           type={showPassword ? "text" : "password"}
         />
       </Stack>
-      <Button type="submit">hi</Button>
+      <Button disabled={addingUser.isLoading} type="submit">
+        Sign In
+      </Button>
     </form>
   );
 }
