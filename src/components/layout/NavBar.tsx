@@ -1,23 +1,29 @@
-import { AppBar, Button, Toolbar } from "@mui/material";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Image } from "@mui/icons-material";
+import { AppBar, Button, Toolbar } from "@mui/material";
+import { Favorite, Image } from "@mui/icons-material";
 import { ReactNode, useState } from "react";
+
+import DialogComponent from "../DialogComponent";
 import ChosseLang from "../languages/ChosseLang";
 import SearchImg from "../SearchImg";
 import DarkMode from "../DarkMode";
-import SignIn from "../../pages/signup";
-import DialogComponent from "../DialogComponent";
+import SignUp from "../../pages/signup";
+import SignIn from "../../pages/signIn";
+import { useTranslation } from "react-i18next";
 
 interface NavBarProps {
   children?: ReactNode;
 }
 
 function NavBar(props: NavBarProps) {
+  const { t } = useTranslation();
+  const singUpWord = t("singUp");
+  const singInWord = t("singIn");
   const navigate = useNavigate();
   const components = props?.children;
   const { pathname } = useLocation();
+  const [signUp, setSignUp] = useState(false);
   const [signIn, setSignIn] = useState(false);
-  const [_logIn, setLogIn] = useState(false);
 
   const buttons = [
     <Button
@@ -33,7 +39,7 @@ function NavBar(props: NavBarProps) {
     <DarkMode key={"mode"} />,
   ];
   return (
-    <div style={{ height: "100%" }}>
+    <div style={{ height: "10%" }}>
       <div style={{ height: "10%" }}>
         <AppBar
           sx={{
@@ -47,23 +53,32 @@ function NavBar(props: NavBarProps) {
                 {button}
               </div>
             ))}
+            {pathname.includes("search") && (
+              <Button onClick={() => navigate("/liked")}>
+                <Favorite />
+              </Button>
+            )}
             {pathname !== "/home" && (
               <div>
-                <SearchImg />
-                <Button
-                  onClick={() => setSignIn(true)}
-                  sx={{ marginInline: "3px" }}
-                  variant="contained"
-                >
-                  Sing in
-                </Button>
-                <Button
-                  onClick={() => setLogIn(true)}
-                  sx={{ marginInline: "3px" }}
-                  variant="contained"
-                >
-                  log in
-                </Button>
+                {pathname !== "/" && <SearchImg />}
+                {!pathname.includes("search") && (
+                  <>
+                    <Button
+                      onClick={() => setSignUp(true)}
+                      sx={{ marginInline: "3px" }}
+                      variant="contained"
+                    >
+                      {singUpWord}
+                    </Button>
+                    <Button
+                      onClick={() => setSignIn(true)}
+                      sx={{ marginInline: "3px" }}
+                      variant="contained"
+                    >
+                      {singInWord}
+                    </Button>
+                  </>
+                )}
               </div>
             )}
             {components}
@@ -71,6 +86,12 @@ function NavBar(props: NavBarProps) {
         </AppBar>
       </div>
       <Outlet />
+      <DialogComponent
+        open={signUp}
+        setOpen={setSignUp}
+        title={{ color: "#fff", text: "sign up" }}
+        content={<SignUp />}
+      />
       <DialogComponent
         open={signIn}
         setOpen={setSignIn}

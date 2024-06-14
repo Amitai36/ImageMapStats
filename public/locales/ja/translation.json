@@ -101,5 +101,7 @@
   "Accessibility details in the country": "国内のアクセシビリティの詳細",
   "no data": "情報がありません。もっと具体的に指定してください。",
   "selectedImage": "選択された画像",
-  "Classify": "分類する"
+  "Classify": "分類する",
+  "singUp": "サインアップ",
+  "singIn": "サインイン"
 }

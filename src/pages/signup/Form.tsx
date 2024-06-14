@@ -1,13 +1,17 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import Button from "@mui/material/Button";
 import InputAdornment from "@mui/material/InputAdornment";
-import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
-import { dir } from "i18next";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAddUser } from "../../api/users/query";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import { dir } from "i18next";
+
+import { useAddUser } from "../../api/users/query";
+import { useUser } from "../../store/User";
+import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface SignInForm {
   name: string;
@@ -16,6 +20,7 @@ interface SignInForm {
 }
 
 function Form() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -23,14 +28,21 @@ function Form() {
   } = useForm<SignInForm>();
 
   const addingUser = useAddUser();
-
+  const { setUser } = useUser();
   const [showPassword, setShowpassword] = useState(false);
   const onSubmit = (e: SignInForm) => {
-    addingUser.mutate(
+    addingUser.mutateAsync(
       { email: e.email, password: e.password, name: e.name },
       {
-        onSuccess: () => {
-          toast.success("הנתונים עלו בהצלחה");
+        onSuccess: (data, v) => {
+          setUser(data.user_name, data._id);
+          toast.success(`המשתמש ${v.name} נוצר בהצלחה`);
+          props.setOpen(false);
+          navigate("/home");
+        },
+        onError(error) {
+          const err = error as AxiosError;
+          toast.error(err.response?.data as string);
         },
       }
     );
@@ -70,7 +82,7 @@ function Form() {
         />
       </Stack>
       <Button disabled={addingUser.isLoading} type="submit">
-        Sign In
+        Sign up
       </Button>
     </form>
   );

@@ -11,9 +11,10 @@ import * as React from "react";
 
 interface DialogComponentProps {
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   content: React.ReactNode;
   title: { text: string; color: string };
+  whenClose?: () => void;
 }
 
 export default function DialogComponent(props: DialogComponentProps) {
@@ -22,12 +23,14 @@ export default function DialogComponent(props: DialogComponentProps) {
     open,
     setOpen,
     title: { text, color },
+    whenClose,
   } = props;
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleClose = () => {
-    setOpen(false);
+    setOpen?.(false);
+    whenClose?.();
   };
 
   const { t } = useTranslation();

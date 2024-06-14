@@ -1,9 +1,10 @@
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import ProviderTheme from "./styles/CreateTheme";
 import Camera from "./components/SearchImg/Camera";
+import ProviderTheme from "./styles/CreateTheme";
 import Log from "./pages/start/Log";
+import NavBar from "./components/layout/NavBar";
 
 const PhotoStatistics = lazy(() => import("./pages/statistics/photo"));
 const UserStatistics = lazy(() => import("./pages/statistics/user"));
@@ -15,19 +16,19 @@ const Home = lazy(() => import("./pages/home"));
 function App() {
   return (
     <ProviderTheme>
+      <NavBar />
       <Routes>
-        <Route path="/" element={<Log />}>
-          <Route path="/userStatistics/:name" element={<UserStatistics />} />
-          <Route path="/userPhotos/:name" element={<UserPhotos />} />
-          <Route path="/search" element={<SearchRes />} />
-          <Route path="/map" element={<MapPage />} />
-          <Route path="/home" element={<Home />} />
-          <Route
-            path="/search/photoStatistics/:photoId"
-            element={<PhotoStatistics />}
-          />
-          <Route path="/camera" element={<Camera />} />
-        </Route>
+        <Route path="/" element={<Log />} />
+        <Route path="/userStatistics/:name" element={<UserStatistics />} />
+        <Route path="/userPhotos/:name" element={<UserPhotos />} />
+        <Route path="/search" element={<SearchRes />} />
+        <Route path="/map" element={<MapPage />} />
+        <Route path="/home" element={<Home />} />
+        <Route
+          path="/search/photoStatistics/:photoId"
+          element={<PhotoStatistics />}
+        />
+        <Route path="/camera" element={<Camera />} />
       </Routes>
     </ProviderTheme>
   );

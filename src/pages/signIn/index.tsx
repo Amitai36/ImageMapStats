@@ -1,18 +1,17 @@
-import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
-
+import CardContent from "@mui/material/CardContent";
 import Form from "./Form";
 
-function SignUp() {
+function SignIn() {
   return (
     <div>
       <Card>
         <CardContent>
-          <Form />
+          <Form  />
         </CardContent>
       </Card>
     </div>
   );
 }
 
-export default SignUp;
+export default SignIn;

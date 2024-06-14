@@ -12,17 +12,12 @@ export const useQueryImage = ({
   pageNumber,
   orderBy,
 }: QueryImageProps) => {
-  return useQuery(
-    ["images", "photo", "user"],
-    () => queryImage({ photoName, pageNumber, orderBy }),
+  return useQuery(["images", "photo", "user"], () =>
+    queryImage({ photoName, pageNumber, orderBy })
   );
 };
 export const useQueryPhotoStatistics = ({ id }: { id: string }) => {
-  return useQuery(
-    ["photo", "statistics"],
-    () => getPhotoStatistics({ id }),
-    {}
-  );
+  return useQuery(["photo", "statistics"], () => getPhotoStatistics({ id }));
 };
 export const useQueryUserStatistics = ({ name }: { name: string }) => {
   return useQuery(["photo", "statistics"], () => getUserStatistics({ name }));
