@@ -3,14 +3,15 @@ import { Route, Routes } from "react-router-dom";
 
 import Camera from "./components/SearchImg/Camera";
 import ProviderTheme from "./styles/CreateTheme";
-import Log from "./pages/start/Log";
 import NavBar from "./components/layout/NavBar";
+import Log from "./pages/start/Log";
 
 const PhotoStatistics = lazy(() => import("./pages/statistics/photo"));
 const UserStatistics = lazy(() => import("./pages/statistics/user"));
 const UserPhotos = lazy(() => import("./pages/userPhoto"));
 const SearchRes = lazy(() => import("./pages/searchRes"));
 const MapPage = lazy(() => import("./pages/map"));
+const Likes = lazy(() => import("./pages/likes"));
 const Home = lazy(() => import("./pages/home"));
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Log />} />
+        <Route path="/liked" element={<Likes />} />
         <Route path="/userStatistics/:name" element={<UserStatistics />} />
         <Route path="/userPhotos/:name" element={<UserPhotos />} />
         <Route path="/search" element={<SearchRes />} />

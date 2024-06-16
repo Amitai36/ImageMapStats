@@ -1,5 +1,9 @@
 import axios from "axios";
+
+import { Results } from "../images/types";
 import { UserDetailsBack } from "./types";
+
+const BASE_URL = process.env.BASE_URL;
 
 export const addUser = async ({
   email,
@@ -11,7 +15,7 @@ export const addUser = async ({
   email: string;
 }) => {
   const adding = await axios.post<UserDetailsBack>(
-    `http://localhost:3000/user/addUser`,
+    `${BASE_URL}/user/addUser`,
     null,
     {
       params: {
@@ -24,6 +28,21 @@ export const addUser = async ({
   return adding.data;
 };
 
+export const addUserLike = async ({
+  userId,
+  photoId,
+  img,
+}: {
+  userId: string;
+  photoId: string;
+  img: Results;
+}) => {
+  await axios.post<UserDetailsBack>(
+    `${BASE_URL}/likes/addLikesByUser?userId=${userId}&photoId=${photoId}`,
+    img
+  );
+};
+
 export const getUser = async ({
   name,
   password,
@@ -32,12 +51,16 @@ export const getUser = async ({
   password: string;
 }) => {
   const res = axios
-    .get<UserDetailsBack>(`http://localhost:3000/user/getUser`, {
+    .get<UserDetailsBack>(`${BASE_URL}/user/getUser`, {
       params: { name, password },
     })
     .then((res) => res.data);
   return res;
 };
-// export const resetPassword = async () => {
-//   await axios.get("http://localhost:3000/user/resetPassword");
-// };
+
+export const getUserLiked = async ({ userId }: { userId: string }) => {
+  const res = axios
+    .get<Results[]>(`${BASE_URL}/likes/getLikeByUser?userId=${userId}`)
+    .then((res) => res.data);
+  return res;
+};

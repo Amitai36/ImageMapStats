@@ -1,7 +1,9 @@
 import { useMutation, useQuery } from "react-query";
-import { addUser, getUser } from "./fetch";
-import { UserDetails } from "./types";
 import { toast } from "react-toastify";
+
+import { addUser, addUserLike, getUser, getUserLiked } from "./fetch";
+import { Results } from "../images/types";
+import { UserDetails } from "./types";
 
 export const useAddUser = () => {
   return useMutation({
@@ -13,6 +15,30 @@ export const useAddUser = () => {
       });
     },
     mutationKey: ["user"],
+  });
+};
+
+export const useAddUserLikes = () => {
+  return useMutation({
+    mutationFn: ({
+      photoId,
+      userId,
+      img,
+    }: {
+      userId: string;
+      photoId: string;
+      img: Results;
+    }) => {
+      return addUserLike({
+        photoId,
+        userId,
+        img,
+      });
+    },
+    mutationKey: ["user"],
+    onSuccess: () => {
+      toast.success("גם אנחנו אהבנו שאהבת");
+    },
   });
 };
 
@@ -38,12 +64,12 @@ export const useGetUser = ({
     },
   });
 };
-// export const useResetPassword = () => {
-//   return useQuery(["user"], () => resetPassword(), {
-//     enabled: false,
-//     onError(err: string) {
-//       console.log(err);
-//       toast.error(err);
-//     },
-//   });
-// };
+
+export const useGetUserLiked = ({ userId }: { userId: string }) => {
+  return useQuery(["user", "like"], () => getUserLiked({ userId }), {
+    onError(err: string) {
+      console.log(err);
+      toast.error(err);
+    },
+  });
+};

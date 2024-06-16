@@ -1,7 +1,6 @@
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import { useLocation, useNavigate } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-// import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
@@ -12,10 +11,10 @@ import CardMedia from "@mui/material/CardMedia";
 import { useTranslation } from "react-i18next";
 import Collapse from "@mui/material/Collapse";
 import { styled } from "@mui/material/styles";
-import { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
-import Card from "@mui/material/Card";
 import { Button } from "@mui/material";
+import Card from "@mui/material/Card";
+import { useState } from "react";
 import "moment/dist/locale/he";
 import "moment/dist/locale/fr";
 import "moment/dist/locale/ja";
@@ -28,6 +27,7 @@ import moment from "moment";
 
 import { Results } from "../../api/images/types";
 import MenuCard from "./MenuCard";
+import LikeCard from "../LikeCard";
 import Shares from "./Shares";
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -139,13 +139,11 @@ function CreateCards(props: CreateCardsProps) {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          {/* <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton> */}
+          <LikeCard img={res} />
           <IconButton onClick={() => setShare(!share)} aria-label="share">
             <ShareIcon />
           </IconButton>
-          {res?.tags && res?.tags?.length > 0 && (
+          {res?.tags && res?.tags?.length > 0 && pathname !== "/liked" && (
             <ExpandMore
               expand={expanded}
               onClick={handleExpandClick}
@@ -156,17 +154,22 @@ function CreateCards(props: CreateCardsProps) {
             </ExpandMore>
           )}
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            {res?.tags?.map((tag, index) => (
-              <Typography component="span" key={index}>
-                {tag?.source?.cover_photo?.alternative_slugs[
-                  language as keyof Results["alternative_slugs"]
-                ] ?? tag.title}
-              </Typography>
-            ))}
-          </CardContent>
-        </Collapse>
+        {pathname !== "/liked" && (
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+              {res?.tags?.map((tag, index) => {
+                return (
+                  <Typography component="span" key={index}>
+                    {tag?.source?.cover_photo?.alternative_slugs[
+                      language as keyof Results["alternative_slugs"]
+                    ] ?? tag.title}
+                    hi
+                  </Typography>
+                );
+              })}
+            </CardContent>
+          </Collapse>
+        )}
       </Card>
       <Shares open={share} setOpen={setShare} url={res.urls.full} />
     </div>
