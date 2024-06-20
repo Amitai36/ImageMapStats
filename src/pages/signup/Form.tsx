@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { dir } from "i18next";
 
 import { useAddUser } from "../../api/users/query";
@@ -20,7 +20,12 @@ interface SignInForm {
   email: string;
 }
 
-function Form() {
+interface FormProps {
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+function Form(props: FormProps) {
+  const { setOpen } = props;
   const navigate = useNavigate();
   const {
     register,
@@ -37,8 +42,9 @@ function Form() {
       {
         onSuccess: (data, v) => {
           setUser(data.user_name, data._id);
-          toast.success(`${t("User successfully created")} ${v.name}}`);
+          toast.success(`${t("User successfully created")} ${v.name}`);
           navigate("/home");
+          setOpen(false);
         },
         onError(error) {
           const err = error as AxiosError;

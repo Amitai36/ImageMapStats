@@ -90,7 +90,7 @@ function NavBar(props: NavBarProps) {
         open={signUp}
         setOpen={setSignUp}
         title={{ color: "#fff", text: "sign up" }}
-        content={<SignUp />}
+        content={<SignUp setOpen={setSignUp} />}
       />
       <DialogComponent
         open={signIn}
