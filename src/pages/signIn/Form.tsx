@@ -3,14 +3,19 @@ import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { dir } from "i18next";
 
 import { useGetUser } from "../../api/users/query";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../store/User";
 
-function Form() {
+interface FormProps {
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+function Form(props: FormProps) {
+  const { setOpen } = props;
   const navigate = useNavigate();
   const [showPassword, setShowpassword] = useState(false);
   const [name, setName] = useState("");
@@ -22,6 +27,7 @@ function Form() {
     if (status === "success") {
       setUser(data.user_name, data._id);
       navigate("/home");
+      setOpen(false);
     }
   }, [data]);
   return (

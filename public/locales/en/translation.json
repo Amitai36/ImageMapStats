@@ -106,5 +106,11 @@
   "selectedImage": "Selected Image",
   "Classify": "Classify",
   "singUp": "singUp",
-  "singIn": "singIn"
+  "singIn": "singIn",
+  "The user is not found": "The user is not found",
+  "One of the fields is missing, please complete": "One of the fields is missing, please complete",
+  "The user exists": "The user exists",
+  "We also liked that you liked it": "We also liked that you liked it",
+  "Welcome": "Welcome",
+  "User successfully created": "User successfully created"
 }

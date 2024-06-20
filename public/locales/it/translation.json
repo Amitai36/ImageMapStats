@@ -106,5 +106,11 @@
   "selectedImage": "Immagine selezionata",
   "Classify": "Classificare",
   "singUp": "Registrati",
-  "singIn": "Accedi"
+  "singIn": "Accedi",
+  "The user is not found": "Utente non trovato",
+  "One of the fields is missing, please complete": "Uno dei campi è mancante, si prega di completarlo",
+  "The user exists": "L'utente esiste",
+  "We also liked that you liked it": "Ci è piaciuto anche che ti sia piaciuto",
+  "Welcome": "Benvenuto",
+  "User successfully created": "Utente creato con successo"
 }

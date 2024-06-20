@@ -96,7 +96,7 @@ function NavBar(props: NavBarProps) {
         open={signIn}
         setOpen={setSignIn}
         title={{ color: "#fff", text: "sign in" }}
-        content={<SignIn />}
+        content={<SignIn setOpen={setSignIn} />}
       />
     </div>
   );

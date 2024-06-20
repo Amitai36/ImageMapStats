@@ -103,5 +103,11 @@
   "selectedImage": "選択された画像",
   "Classify": "分類する",
   "singUp": "サインアップ",
-  "singIn": "サインイン"
+  "singIn": "サインイン",
+  "The user is not found": "ユーザーが見つかりません",
+  "One of the fields is missing, please complete": "必要な情報が不足しています。入力を完了してください。",
+  "The user exists": "ユーザーが存在します",
+  "We also liked that you liked it": "あなたが気に入ってくれたのもうれしいです",
+  "Welcome": "ようこそ",
+  "User successfully created": "ユーザーが正常に作成されました"
 }

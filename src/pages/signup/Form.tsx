@@ -12,6 +12,7 @@ import { useAddUser } from "../../api/users/query";
 import { useUser } from "../../store/User";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface SignInForm {
   name: string;
@@ -26,7 +27,7 @@ function Form() {
     handleSubmit,
     formState: { errors },
   } = useForm<SignInForm>();
-
+  const { t } = useTranslation();
   const addingUser = useAddUser();
   const { setUser } = useUser();
   const [showPassword, setShowpassword] = useState(false);
@@ -36,8 +37,7 @@ function Form() {
       {
         onSuccess: (data, v) => {
           setUser(data.user_name, data._id);
-          toast.success(`המשתמש ${v.name} נוצר בהצלחה`);
-          props.setOpen(false);
+          toast.success(`${t("User successfully created")} ${v.name}}`);
           navigate("/home");
         },
         onError(error) {

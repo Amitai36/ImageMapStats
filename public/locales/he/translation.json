@@ -45,5 +45,11 @@
   "selectedImage": "תמונה נבחרת",
   "Classify": "לסווג",
   "singUp": "הרשם",
-  "singIn": "התחבר"
+  "singIn": "התחבר",
+  "The user is not found": "המשתמש לא נמצא",
+  "One of the fields is missing, please complete": "חסרה אחת מהשדות, אנא השלם",
+  "The user exists": "המשתמש קיים",
+  "We also liked that you liked it": "גם אנחנו אהבנו שאהבת את זה",
+  "Welcome": "ברוך הבא",
+  "User successfully created": "המשתמש נוצר בהצלחה"
 }

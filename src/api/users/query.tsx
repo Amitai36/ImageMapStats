@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { addUser, addUserLike, getUser, getUserLiked } from "./fetch";
 import { Results } from "../images/types";
 import { UserDetails } from "./types";
+import { useTranslation } from "react-i18next";
 
 export const useAddUser = () => {
   return useMutation({
@@ -19,6 +20,7 @@ export const useAddUser = () => {
 };
 
 export const useAddUserLikes = () => {
+  const { t } = useTranslation();
   return useMutation({
     mutationFn: ({
       photoId,
@@ -37,7 +39,7 @@ export const useAddUserLikes = () => {
     },
     mutationKey: ["user"],
     onSuccess: () => {
-      toast.success("גם אנחנו אהבנו שאהבת");
+      toast.success(t("We also liked that you liked it"));
     },
   });
 };
@@ -49,6 +51,7 @@ export const useGetUser = ({
   name: string;
   password: string;
 }) => {
+  const { t } = useTranslation();
   return useQuery(["user"], () => getUser({ name, password }), {
     enabled: false,
     onError(err: string) {
@@ -57,19 +60,23 @@ export const useGetUser = ({
     },
     onSuccess(data) {
       if (typeof data === "string") {
-        toast.warning(data);
+        toast.warning(t(data));
       } else {
-        toast.success(`ברוך הבא ${data.user_name}`);
+        toast.success(`${t("Welcome")} ${data.user_name}`);
       }
     },
   });
 };
 
 export const useGetUserLiked = ({ userId }: { userId: string }) => {
-  return useQuery(["user", "like"], () => getUserLiked({ userId }), {
-    onError(err: string) {
-      console.log(err);
-      toast.error(err);
-    },
-  });
+  return useQuery(
+    ["user", "like", "image", "photo"],
+    () => getUserLiked({ userId }),
+    {
+      onError(err: string) {
+        console.log(err);
+        toast.error(err);
+      },
+    }
+  );
 };
