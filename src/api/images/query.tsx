@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQueries, useQuery } from "react-query";
 import {
   getPhotoStatistics,
   getUserPhotos,
@@ -6,15 +6,25 @@ import {
   queryImage,
 } from "./fetch";
 import { QueryImageProps } from "./types";
+import { getIdLikesByUser } from "../users/fetch";
 
 export const useQueryImage = ({
   photoName,
   pageNumber,
   orderBy,
+  userId,
 }: QueryImageProps) => {
-  return useQuery(["images", "photo", "user"], () =>
-    queryImage({ photoName, pageNumber, orderBy })
-  );
+  return useQueries([
+    {
+      queryKey: ["images", "photo", "user"],
+      queryFn: () => queryImage({ photoName, pageNumber, orderBy }),
+      cacheTime: 0,
+    },
+    {
+      queryKey: ["user", "like", "image", "photo"],
+      queryFn: () => getIdLikesByUser({ userId: userId! }),
+    },
+  ]);
 };
 export const useQueryPhotoStatistics = ({ id }: { id: string }) => {
   return useQuery(["photo", "statistics"], () => getPhotoStatistics({ id }));

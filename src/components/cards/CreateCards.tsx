@@ -29,6 +29,11 @@ import { Results } from "../../api/images/types";
 import MenuCard from "./MenuCard";
 import LikeCard from "../LikeCard";
 import Shares from "./Shares";
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+} from "react-query";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -36,6 +41,10 @@ interface ExpandMoreProps extends IconButtonProps {
 
 interface CreateCardsProps {
   res: Results;
+  ids: string[];
+  refetchIds: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<string[], unknown>>;
 }
 
 const ExpandMore = styled((props: ExpandMoreProps) => {
@@ -53,19 +62,22 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 });
 
 function CreateCards(props: CreateCardsProps) {
-  const { res } = props;
+  const { res, ids, refetchIds } = props;
   const trans = useTranslation();
 
   const photoStatistics = trans.t("photoStatistics");
   const userStatistics = trans.t("userStatistics");
   const portfolio = trans.t("portfolio");
   const location = trans.t("location");
-  const language = trans.i18n.language;
+  const language = trans.i18n.language !== "he-IL" ? trans.i18n.language : "en";
   moment.locale(language);
+
   const alt =
-    res.alternative_slugs[
+    res?.alternative_slugs[
       trans.i18n.language as keyof Results["alternative_slugs"]
-    ]?.replace(/-/g, " ") ?? res.alt_description;
+    ]?.replace(/-/g, " ") ??
+    res?.alt_description ??
+    " ";
 
   const createdAt = res.created_at;
   const user = res.user;
@@ -76,15 +88,19 @@ function CreateCards(props: CreateCardsProps) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const open = Boolean(anchorEl);
+  const liked = ids?.includes(res.id) ?? false;
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
   return (
     <div>
       <Card>
@@ -139,7 +155,7 @@ function CreateCards(props: CreateCardsProps) {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <LikeCard img={res} />
+          <LikeCard refetchIds={refetchIds} liked={liked} img={res} />
           <IconButton onClick={() => setShare(!share)} aria-label="share">
             <ShareIcon />
           </IconButton>

@@ -8,6 +8,7 @@ export interface QueryImageProps {
   photoName: string;
   pageNumber: number;
   orderBy: OrderBySearch;
+  userId?: string;
 }
 type User = {
   accepted_tos: boolean;

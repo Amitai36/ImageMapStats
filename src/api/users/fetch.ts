@@ -56,8 +56,15 @@ export const getUser = async ({
 export const getUserLiked = async ({ userId }: { userId: string }) => {
   const res = axios
     .get<Results[]>(
-      `http://localhost:3000/likes/getLikeByUser?userId=${userId}`,
-      {}
+      `http://localhost:3000/likes/getLikeByUser?userId=${userId}`
+    )
+    .then((res) => res.data);
+  return res;
+};
+export const getIdLikesByUser = async ({ userId }: { userId: string }) => {
+  const res = axios
+    .get<string[]>(
+      `http://localhost:3000/likes/getIdLikeByUser?userId=${userId}`
     )
     .then((res) => res.data);
   return res;

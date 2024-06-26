@@ -1,29 +1,32 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { AppBar, Button, Toolbar } from "@mui/material";
 import { Favorite, Image } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 import { ReactNode, useState } from "react";
 
 import DialogComponent from "../DialogComponent";
 import ChosseLang from "../languages/ChosseLang";
-import SearchImg from "../SearchImg";
-import DarkMode from "../DarkMode";
+import { useUser } from "../../store/User";
 import SignUp from "../../pages/signup";
 import SignIn from "../../pages/signIn";
-import { useTranslation } from "react-i18next";
+import SearchImg from "../SearchImg";
+import DarkMode from "../DarkMode";
 
 interface NavBarProps {
   children?: ReactNode;
 }
 
 function NavBar(props: NavBarProps) {
+  const components = props?.children;
   const { t } = useTranslation();
   const singUpWord = t("singUp");
   const singInWord = t("singIn");
-  const navigate = useNavigate();
-  const components = props?.children;
-  const { pathname } = useLocation();
   const [signUp, setSignUp] = useState(false);
   const [signIn, setSignIn] = useState(false);
+
+  const { pathname } = useLocation();
+  const { user } = useUser();
+  const navigate = useNavigate();
 
   const buttons = [
     <Button
@@ -58,7 +61,7 @@ function NavBar(props: NavBarProps) {
                 <Favorite />
               </Button>
             )}
-            {pathname !== "/home" && (
+            {!user.id && (
               <div>
                 {pathname !== "/" && <SearchImg />}
                 {!pathname.includes("search") && (

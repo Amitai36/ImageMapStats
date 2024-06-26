@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import DisplayResponsiveCards from "../../components/cards/DisplayResponsiveCards";
 import { FetchRes, OrderBySearch } from "../../api/images/types";
 import CreateTabs from "../../components/CreateTabs";
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
 
 interface DisplayResProps {
   items: FetchRes | undefined;
@@ -17,6 +18,10 @@ interface DisplayResProps {
   setSearchParams?: SetURLSearchParams;
   element: string;
   isLoading: boolean;
+  ids: string[];
+  refetchIds: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<string[], unknown>>;
 }
 
 function DisplayRes(props: DisplayResProps) {
@@ -29,6 +34,8 @@ function DisplayRes(props: DisplayResProps) {
     setSearchParams,
     element,
     isLoading,
+    ids,
+    refetchIds
   } = props;
 
   const { t } = useTranslation();
@@ -63,7 +70,7 @@ function DisplayRes(props: DisplayResProps) {
           </div>
         </>
       )}
-      <DisplayResponsiveCards items={items?.results} />
+      <DisplayResponsiveCards refetchIds={refetchIds} ids={ids} items={items?.results} />
     </div>
   );
 }

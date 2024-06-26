@@ -1,7 +1,13 @@
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 
-import { addUser, addUserLike, getUser, getUserLiked } from "./fetch";
+import {
+  addUser,
+  addUserLike,
+  getIdLikesByUser,
+  getUser,
+  getUserLiked,
+} from "./fetch";
 import { Results } from "../images/types";
 import { UserDetails } from "./types";
 import { useTranslation } from "react-i18next";
@@ -69,9 +75,18 @@ export const useGetUser = ({
 };
 
 export const useGetUserLiked = ({ userId }: { userId: string }) => {
+  return useQuery(["photo", "user"], () => getUserLiked({ userId }), {
+    onError(err: string) {
+      console.log(err);
+      toast.error(err);
+    },
+    cacheTime: 0,
+  });
+};
+export const useGetIdLikesByUser = ({ userId }: { userId: string }) => {
   return useQuery(
-    ["user", "like", "image", "photo"],
-    () => getUserLiked({ userId }),
+    ["user", "like", "image", "photo", "idPhoto"],
+    () => getIdLikesByUser({ userId: userId! }),
     {
       onError(err: string) {
         console.log(err);

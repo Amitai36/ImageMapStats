@@ -27,15 +27,17 @@ interface FormProps {
 function Form(props: FormProps) {
   const { setOpen } = props;
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const addingUser = useAddUser();
+  const { setUser } = useUser();
+  const [showPassword, setShowpassword] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SignInForm>();
-  const { t } = useTranslation();
-  const addingUser = useAddUser();
-  const { setUser } = useUser();
-  const [showPassword, setShowpassword] = useState(false);
+
   const onSubmit = (e: SignInForm) => {
     addingUser.mutateAsync(
       { email: e.email, password: e.password, name: e.name },
